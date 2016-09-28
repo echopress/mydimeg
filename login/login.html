@@ -1,0 +1,58 @@
+<html> 
+<head> 
+
+<title>Secure-Login</title> 
+
+<script type="text/javascript">
+
+	function login(){ 
+
+		var pin = document.myForm.pin.value;
+		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/tommy-xml-form2.xml";	
+		var cfmScriptToXmlSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=nomefileMultiSign";	
+		
+        		
+		//LoginSicuroApplet.loginSicuro(pin, urlToSigning, cfmScriptToXmlSigned);
+		LoginSicuroApplet.loginSicuro(pin);
+		document.myForm.pin.value="";
+	  
+	}//login
+	
+	
+	function pinCorretto(){		
+	    
+		document.myForm.pin.value="";
+		document.myForm.submit();
+				
+	  
+	}//pinCorretto
+	
+	
+	function pinErrato(){
+		
+	    alert("Attenzione: pin errato!");
+		document.myForm.pin.value="";
+	  
+	}//pinErrato 	
+
+  	
+
+</script>
+
+</head> 
+
+<body> 
+
+	<form name=myForm action="../unicalXmlTestForm.cfm" method="post" > 
+    
+		
+		PIN: <input type = "password" name = "pin" id = "pin"> 
+		     <input type=button value="Login" onClick="login();">
+		    
+	</form>
+
+	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50"></APPLET> 
+	
+</body>
+ 
+</html>

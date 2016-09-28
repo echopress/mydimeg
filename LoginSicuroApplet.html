@@ -1,0 +1,78 @@
+<HTML> 
+<HEAD> 
+
+<TITLE>Login Sicuro</TITLE> 
+
+<script type="text/javascript">
+
+	function login(){ 
+
+		var pin = document.myForm.pin.value;
+			
+        //alert(pin);			
+		LoginSicuroApplet.loginSicuro(pin);
+		//LoginSicuroApplet.printPrivateKey(pin);
+				
+		
+		document.myForm.pin.value="";
+	  
+	  
+	} 
+	  
+	  	function setPrivateKey(pin){ 
+
+		document.myForm.textAreaPrivateKey.value= pin;
+	    //alert("setPrivateKey: "+pin);
+	  
+	  } 
+	  
+	  	function setCertificato(pin){ 
+
+		document.myForm.textAreaCertificato.value= pin;
+	    //alert("setCertificato: "+pin);
+	  
+	  } 
+	  
+	  function pinErrato(){
+		
+	    alert("Attenzione: pin errato!");
+	  
+	  }
+
+</script>
+
+</HEAD> 
+
+<BODY> 
+
+	<form name=myForm action=""> 
+			
+		<input type = "password" name = "pin" id = "pin"> 
+		<input type=button value="Login" onClick="login();">
+		<br />	
+
+			<!--<input type = "text" name = "testo" id = "testo">-->
+			
+			<br />
+			<br />
+			
+			Private Key:<br />
+			<textarea rows="2" cols="50" name="textAreaPrivateKey">
+			</textarea>
+			
+			<br />
+			<br />
+			
+
+			SIGNED XML DOCUMENT:<br />
+			<textarea rows="20" cols="200" name="textAreaCertificato">
+			
+			</textarea>
+	
+	</form>
+
+	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50"></APPLET> 
+	
+</BODY> 
+
+</HTML>
