@@ -89,25 +89,7 @@
 			
 		<input type = "password" name = "pin" id = "pin"> 
 		<input type=button value="Sign" onClick="login();">
-		<br />	
 			
-			
-			<br />
-			<br />
-			
-			Private Key:<br />
-			<textarea rows="2" cols="50" name="textAreaPrivateKey">
-			</textarea>
-			
-			<br />
-			<br />
-			
-
-			SIGNED XML DOCUMENT:<br />
-			<textarea rows="20" cols="200" name="textAreaCertificato">
-			
-			</textarea>
-	
 	</form>
 
 	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50"></APPLET> 
