@@ -13,8 +13,20 @@
 		
         		
 		//LoginSicuroApplet.loginSicuro(pin, urlToSigning, cfmScriptToXmlSigned);
-		LoginSicuroApplet.loginSicuro(pin);
-		document.myForm.pin.value="";
+		if(document.myForm.pin.value === "" ){
+
+			alert("Attenzione: inserire il codice PIN!");
+		}
+		
+		else{
+		
+		
+		 LoginSicuroApplet.loginSicuro(pin);
+		 document.myForm.pin.value="";
+		
+		}
+		
+		
 	  
 	}//login
 	
@@ -28,9 +40,10 @@
 	}//pinCorretto
 	
 	
-	function pinErrato(){
+	function pinErrato(errore){
 		
-	    alert("Attenzione: pin errato!");
+	    //alert("Attenzione: pin errato!");
+		alert(errore);
 		document.myForm.pin.value="";
 	  
 	}//pinErrato 	
@@ -43,15 +56,17 @@
 
 <body> 
 
-	<form name=myForm action="../unicalXmlTestForm.cfm" method="post" > 
+	
+	<form  name=myForm action="../unicalXmlTestForm.cfm" method="post"  align="center"> 
     
-		
+		<p style="margin-top:350px; margin-left:800px">
 		PIN: <input type = "password" name = "pin" id = "pin"> 
 		     <input type=button value="Login" onClick="login();">
+		</p>	 
 		    
 	</form>
 
-	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50"></APPLET> 
+	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50" style="margin-top:20px; margin-left:720px"></APPLET> 
 	
 </body>
  
