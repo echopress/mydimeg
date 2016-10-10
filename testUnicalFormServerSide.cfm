@@ -2,6 +2,7 @@
 
 <cfset fisrtName="#FORM.FirstName#" >
 <cfset account="#FORM.account#" >
+<cfset filePDF="#FORM.filePDF#" >
 
 <cfif fisrtName IS NOT "">
 
@@ -17,16 +18,46 @@
 
 </cfif>
 
+
+
+<cfif filePDF IS NOT "">
+
+    <cffile
+        action="UPLOAD"
+        filefield="Form.filePDF"
+        destination="D:\WWW\mydimeg\portale_admin\"
+        nameconflict="MAKEUNIQUE">
+        
+        
+        
+	<!--- Read in a binary data file. ---> 
+    <cffile action="readbinary" file="D:\WWW\mydimeg\portale_admin\tesi_neo4j.pdf" variable="binimage"> 
+    
+    <!--- Convert the read data to binary encoding ---> 
+    <cfscript> 
+        binencode = BinaryEncode(binimage, "Base64");
+    </cfscript> 
+    
+    <!---<cffile action="write" file="D:\WWW\mydimeg\portale_admin\string.txt" output="#binencode#" addnewline="No" > --->
+    <cfset xmlDocument = xmlDocument & '#binencode#' >
+    
+    
+        
+</cfif>
+
+
+
 <cfset xmlDocument = xmlDocument & '</PatientRecord>' >
-
-
-
 
 
 <!--- Creazione documento XML da firmare --->
 <cfset myXMLDocument = XmlParse(xmlDocument)>
 <cfset XMLText=ToString(myXMLDocument)>
 <cffile action="write" file="D:\WWW\mydimeg\portale_admin\tommy-xml-form2.xml" output="#XMLText#">
+
+
+
+
 
 
 
@@ -84,6 +115,7 @@
 </HEAD> 
 
 <BODY> 
+
 
 	<form name=myForm action=""> 
 			
