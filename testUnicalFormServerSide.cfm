@@ -29,19 +29,25 @@
         nameconflict="MAKEUNIQUE">
         
         
-        
+	<cfset Uploaded_File_Name = CFFile.ClientFile>
+   
+    <cfset fileUrl = "D:\WWW\mydimeg\portale_admin\" & "#Uploaded_File_Name#" >   
+    <cfoutput>#fileUrl#</cfoutput>
+     
 	<!--- Read in a binary data file. ---> 
-    <cffile action="readbinary" file="D:\WWW\mydimeg\portale_admin\tesi_neo4j.pdf" variable="binimage"> 
+    <cffile action="readbinary"  file = "#fileUrl#" variable = "binimage"> 
     
     <!--- Convert the read data to binary encoding ---> 
     <cfscript> 
         binencode = BinaryEncode(binimage, "Base64");
     </cfscript> 
     
-    <!---<cffile action="write" file="D:\WWW\mydimeg\portale_admin\string.txt" output="#binencode#" addnewline="No" > --->
-    <cfset xmlDocument = xmlDocument & '#binencode#' >
     
+     <cfset xmlDocument = xmlDocument & '<AttachBase64Econcode>' & "#binencode#" & '</AttachBase64Econcode>' >	
+
+   <!--- <cfset xmlDocument = xmlDocument & '#binencode#' >--->
     
+   
         
 </cfif>
 

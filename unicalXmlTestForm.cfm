@@ -12,7 +12,7 @@
      <p> 
         First Name: <input type="Text" name="FirstName" size="20"maxlength="35"><br> 
         Account: <input type="Text" name="account" size="20" maxlength="35"><br> 
-        File:    <input type="file" name="filePDF" />
+        PDF File:    <input type="file" name="filePDF" />
     </p> 
    
      <!--- Reset button. ---> 
