@@ -1,25 +1,9 @@
 <cfset xmlDocument = '<?xml version="1.0" encoding="UTF-8"?>' >
 
-<cfset fisrtName="#FORM.FirstName#" >
-<cfset account="#FORM.account#" >
-<cfset filePDF="#FORM.filePDF#" >
-
-<cfif fisrtName IS NOT "">
-
-	<cfset xmlDocument = xmlDocument & '<PatientRecord><Name>' & "#FORM.FirstName#" & '</Name>' >	
-
-</cfif>
-
-
-
-<cfif account IS NOT "">
-
-	<cfset xmlDocument = xmlDocument & '<Account id="acct">' & "#FORM.account#" & '</Account>' >	
-
-</cfif>
-
-
-
+ <cfset fileUrl = "" >
+ <cfset xmlBinenCode = "" >
+ 
+ 
 <cfif filePDF IS NOT "">
 
     <cffile
@@ -32,7 +16,7 @@
 	<cfset Uploaded_File_Name = CFFile.ClientFile>
    
     <cfset fileUrl = "D:\WWW\mydimeg\portale_admin\" & "#Uploaded_File_Name#" >   
-    <cfoutput>#fileUrl#</cfoutput>
+    
      
 	<!--- Read in a binary data file. ---> 
     <cffile action="readbinary"  file = "#fileUrl#" variable = "binimage"> 
@@ -44,28 +28,54 @@
     
     
      <cfset xmlDocument = xmlDocument & '<AttachBase64Econcode>' & "#binencode#" & '</AttachBase64Econcode>' >	
-
-   <!--- <cfset xmlDocument = xmlDocument & '#binencode#' >--->
-    
-   
+     
+     <cfset xmlBinenCode = '<AttachBase64Econcode>' & "#binencode#" & '</AttachBase64Econcode>' >
         
 </cfif>
 
 
 
-<cfset xmlDocument = xmlDocument & '</PatientRecord>' >
 
-
-<!--- Creazione documento XML da firmare --->
-<cfset myXMLDocument = XmlParse(xmlDocument)>
-<cfset XMLText=ToString(myXMLDocument)>
-<cffile action="write" file="D:\WWW\mydimeg\portale_admin\tommy-xml-form2.xml" output="#XMLText#">
-
-
-
-
-
-
+<ul>
+    <cfoutput>
+    <cfset v_temp = '<?xml version="1.0" encoding="UTF-8"?>' & '<#FORM.nomeForm#>'>
+    <cfset v_temp_tot="">
+    
+     <cfset v_temp_tot=v_temp_tot&v_temp>  
+     
+        <cfloop list="#form.fieldNames#" index="i">
+           
+                  <cfif len(trim(form[i])) neq 0>
+                					              
+                      <cfif (#i# IS NOT "SUBMITFORM") AND (#i# IS NOT "FILEPDF") AND (#i# IS NOT "NOMEFORM") >
+                                                  
+                           <cfset v_temp="<"&#LCase(i)#&"><#FORM[i]#></"&#LCase(i)#&">" >
+                           
+                           <cfset v_temp_tot=v_temp_tot&v_temp>  
+                       
+                      </cfif>    
+         
+                
+               </cfif>
+             
+        </cfloop>
+        
+        
+		<cfset v_temp_tot=v_temp_tot &  xmlBinenCode > 
+        
+        
+         
+        <cfset v_temp_tot=v_temp_tot & "</#FORM.nomeForm#>">  
+        
+       
+        <!--- scrivo file xml generato dalla form su disco --->
+        <cfset nomeFile  = "D:\WWW\mydimeg\portale_admin\" & "#FORM.nomeForm#" & ".xml">      
+        <cffile action="write" file = "#nomeFile#" output="#v_temp_tot#">
+        
+        
+        
+    </cfoutput>
+</ul>
 
 <HTML> 
 <HEAD> 

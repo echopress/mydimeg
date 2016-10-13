@@ -1,7 +1,12 @@
 <cfset fileName = url.val1 />
+<cfset codiceFiscale = url.Q_CODICEFISCALE />
+<cfset firmaDigitale = url.Q_FIRMADIGITALE />
+
 
 
 <cfoutput>
+
+
 
 
 <cfset xml_data = ToString(GetHttpRequestData().content) >
