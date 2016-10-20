@@ -105,7 +105,7 @@
 	  
 	  function firmaXmlOK(data){
 	  
-	  alert(data);
+	  //alert(data);
 	  document.myForm.pin.value="";
 
 	  //JS_WriteQuery();
@@ -261,13 +261,18 @@
 		
 
 		var pin = document.myForm.pin.value;
+		var v = '<cfoutput>#FORM.nomeForm#</cfoutput>'+'.xml';
+		alert(v);
 		
-<!---		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/" + <cfoutput>"#FORM.nomeForm#" & ".xml"</cfoutput>;	
+		var urlToSigning = 'http://svilmydimeg.echopress.it/portale_admin/' + '<cfoutput>#FORM.nomeForm#</cfoutput>'+'.xml';
 		
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1="+<cfoutput>"#FORM.nomeForm#"&"signed"</cfoutput>;	--->
+		var cfmScriptToSigned =  'http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=' + '<cfoutput>#FORM.nomeForm#</cfoutput>'+'Signed';
 		
-		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/PatientRecord.xml";		
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=PatientRecordSigned";	
+		
+		
+		
+<!---		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/PatientRecord.xml";	
+		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=PatientRecordSigned";	--->	
 		       
 		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
 		
@@ -281,11 +286,11 @@
 		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/tommy-xml-form2.xml";	
 		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=nomefileMultiSign";	
 		        		
-        alert("login");			
+       
 		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
 		
 		document.myForm.pin.value="";
-	  alert("vvvvvvvv");	
+	  
 	}
   
 	</script>
