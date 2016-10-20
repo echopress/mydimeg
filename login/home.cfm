@@ -144,4 +144,8 @@
     <!-- /.content -->
 
 <cfinclude template="main-content-closed.cfm">
+
 <cfinclude template="footer-login.cfm">
+
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="/admin-esempio/dist/js/pages/dashboard.js"></script>

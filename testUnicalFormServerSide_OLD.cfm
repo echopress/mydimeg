@@ -46,7 +46,7 @@
                 					              
                       <cfif (#i# IS NOT "SUBMITFORM") AND (#i# IS NOT "FILEPDF") AND (#i# IS NOT "NOMEFORM") >
                                                   
-                           <cfset v_temp="<"&#LCase(i)#&">#FORM[i]#</"&#LCase(i)#&">" >
+                           <cfset v_temp="<"&#LCase(i)#&"><#FORM[i]#></"&#LCase(i)#&">" >
                            
                            <cfset v_temp_tot=v_temp_tot&v_temp>  
                        
@@ -59,16 +59,16 @@
         
         
 		<cfset v_temp_tot=v_temp_tot &  xmlBinenCode >         
-      
+        
          
         <cfset v_temp_tot=v_temp_tot & "</#FORM.nomeForm#>">  
         
        
         <!--- scrivo file xml generato dalla form su disco --->
-       <cfset nomeFile  = "D:\WWW\mydimeg\portale_admin\" & "#FORM.nomeForm#" & ".xml">      
-        <!--- <cffile action="write" file = "#nomeFile#" output="#v_temp_tot#">--->
+        <cfset nomeFile  = "D:\WWW\mydimeg\portale_admin\" & "#FORM.nomeForm#" & ".xml">      
+        <cffile action="write" file = "#nomeFile#" output="#v_temp_tot#">
         
-       
+        
         
     </cfoutput>
     
@@ -81,7 +81,18 @@
 
 <script type="text/javascript">
 
+	function salvaAndFirma(){ 
 
+		var pin = document.myForm.pin.value;
+		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/tommy-xml-form2.xml";	
+		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=nomefileMultiSign";	
+		
+        //alert(pin);			
+		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
+		
+		document.myForm.pin.value="";
+	  
+	} 
 	  
 	  	function setPrivateKey(pin){ 
 
@@ -103,17 +114,55 @@
 	  
 	  }
 	  
-	  function firmaXmlOK(data){
+	  function firmaXmlOK(){
 	  
-	  alert(data);
+	  //alert("Documento firmato con successo!");
 	  document.myForm.pin.value="";
 
-	  //JS_WriteQuery();
+	  JS_WriteQuery();
 	  //location.href = "http://svilmydimeg.echopress.it/portale_admin/login/login.html";
 	  
 	}//firmaXmlOK
 	
+	
+  function JS_WriteQuery(){	
+	
+			
+	var dataToSend = "";
+	
+		
+	$.ajax({
+		
+		type:"POST",	
+		url:"http://svilmydimeg.echopress.it/portale_admin/writeDB.cfm",		
+		data: dataToSend,
+		cache:false,
+		timeout:120000,
+		async:false,		
+		
+		success:function(data){
+		
+		  alert("Documento firmato con successo!");
+						
+		},
+		
+		error:function(data){
+			
+		   alert("Errore nella connessione al server!");
+		  
+		   //location.reload(true);
+					  
+		}
+	
+    });//end ajax_call
 
+  }
+  
+  
+  function salva(){ 
+  
+  
+  }//salva
 
 </script>
 
@@ -150,7 +199,7 @@
                                       
                   </tr>
                   
-                  <cfset postData = postData & "$" & "#form[i]#" >
+                  <cfset postData = postData & "#form[i]#" >
                  
                  </cfoutput>
                  
@@ -169,128 +218,10 @@
 		<input type = "password" name = "pin" id = "pin"> 
 		<input type=button value="Salva e Firma" onClick="salvaAndFirma();">
         <input type=button value="Salva" onClick="salva();">
-       
 			
 	</form>
 
 	<APPLET codebase="http://svilmydimeg.echopress.it/portale_admin" archive="LoginSicuroApplet.jar" CODE="com.loginsicuro/LoginSicuroAppletEnveloped.class" name="loginApplet" id="LoginSicuroApplet" WIDTH="400" HEIGHT="50"></APPLET> 
-    
-    <script>
-	
-	  function salva(){ 
-  
-	 	  
-		  var dataToSend = {
-			
-			'Q_QUERY' : '<cfoutput>#postData#</cfoutput>',
-			'Q_NOME_FORM' : '<cfoutput>#FORM.nomeForm#</cfoutput>',
-            'Q_V_TEMP_TOT' : '<cfoutput>#v_temp_tot#</cfoutput>'
-			
-		  };
-		
-			
-		$.ajax({
-			
-			type:"POST",	
-			url:"writeDB.cfm",		
-			data: dataToSend,
-			cache:false,
-			timeout:120000,
-			async:false,		
-			
-			success:function(data){
-			
-			  //alert("Dati inviati con successo!");
-							
-			},
-			
-			error:function(data){
-				
-			   alert("Errore nella connessione al server!");
-			  
-			   //location.reload(true);
-						  
-			}
-		
-		});//end ajax_call
-  
-      }//salva
-  
-  
-  
-  	function salvaAndFirma(){ 
-	
-	
-	    //scrivere dati nelo DB
-	    //salva();	
-		
-		
-		var dataToSend = {
-			
-			'Q_QUERY' : '<cfoutput>#postData#</cfoutput>',
-			'Q_NOME_FORM' : '<cfoutput>#FORM.nomeForm#</cfoutput>',
-            'Q_V_TEMP_TOT' : '<cfoutput>#v_temp_tot#</cfoutput>'
-			
-		};
-		
-			
-		$.ajax({
-			
-			type:"POST",	
-			url:"writeDB.cfm",		
-			data: dataToSend,
-			cache:false,
-			timeout:120000,
-			async:false,		
-			
-			success:function(data){
-			
-			  alert("Dati inviati con successo salva  firma!");
-							
-			},
-			
-			error:function(data){
-				
-			   alert("Errore nella connessione al server!");
-			  
-			   //location.reload(true);
-						  
-			}
-		
-		});//end ajax_call
-		
-
-		var pin = document.myForm.pin.value;
-		
-<!---		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/" + <cfoutput>"#FORM.nomeForm#" & ".xml"</cfoutput>;	
-		
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1="+<cfoutput>"#FORM.nomeForm#"&"signed"</cfoutput>;	--->
-		
-		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/PatientRecord.xml";		
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=PatientRecordSigned";	
-		       
-		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
-		
-		document.myForm.pin.value="";
-	 
-	}   
-	
-	function login(){
-	
-		var pin = document.myForm.pin.value;
-		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/tommy-xml-form2.xml";	
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=nomefileMultiSign";	
-		        		
-        alert("login");			
-		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
-		
-		document.myForm.pin.value="";
-	  alert("vvvvvvvv");	
-	}
-  
-	</script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	
 </BODY> 
 

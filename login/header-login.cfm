@@ -36,6 +36,7 @@
       <link rel="stylesheet" href="/admin-esempio/plugins/datepicker/datepicker3.css">
       <!-- Daterange picker -->
       <link rel="stylesheet" href="/admin-esempio/plugins/daterangepicker/daterangepicker.css">
+      <link rel="stylesheet" href="/admin-esempio/plugins/timepicker/bootstrap-timepicker.min.css">
       <!-- bootstrap wysihtml5 - text editor -->
       <link rel="stylesheet" href="/admin-esempio/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
       

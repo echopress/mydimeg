@@ -23,6 +23,8 @@
         <script src="/admin-esempio/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- datepicker -->
         <script src="/admin-esempio/plugins/datepicker/bootstrap-datepicker.js"></script>
+        <!-- timepicker -->
+        <script src="/admin-esempio/plugins/timepicker/bootstrap-timepicker.min.js"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="/admin-esempio/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
         <!-- Slimscroll -->
@@ -31,9 +33,17 @@
         <script src="/admin-esempio/plugins/fastclick/fastclick.js"></script>
         <!-- AdminLTE App -->
         <script src="/admin-esempio/dist/js/app.min.js"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="/admin-esempio/dist/js/pages/dashboard.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/admin-esempio/dist/js/demo.js"></script>
+        
+        <script>
+			$(document).ready(function(){
+				$('.rangedatepicker').daterangepicker();
+				$(".timepicker").timepicker({
+					showInputs: false
+				});
+			});			
+		</script>
+        
     </body>
     </html>

@@ -1,6 +1,10 @@
+<!---<cfset xml_data ="pippo">
+<cffile action="append" output = "#xml_data#" file="D:\WWW\mydimeg\rrrr.txt">--->
+
 <cfset fileName = url.val1 />
-<cfset codiceFiscale = url.Q_CODICEFISCALE />
-<cfset firmaDigitale = url.Q_FIRMADIGITALE />
+
+<!---<cfset codiceFiscale = url.Q_CODICEFISCALE />
+<cfset firmaDigitale = url.Q_FIRMADIGITALE />--->
 
 
 
@@ -10,6 +14,9 @@
 
 
 <cfset xml_data = ToString(GetHttpRequestData().content) >
+
+
+<!---<cfdump var="#xml_data#" output="D:\WWW\mydimeg\portale_admin\rrrr.txt" >--->
 
 <cfset returnValue = '#xml_data#' >
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<order id="4323251"> 
+    <customer firstname="Philip" lastname="Cramer" accountNum="21"/> 
+    <items> 
+        <item id="43"> 
+            <name>Deluxe Carpenter&apos;s Hammer</name> 
+            <quantity>1</quantity> 
+            <unitprice>15.95</unitprice> 
+        </item> 
+        <item id="54"> 
+            <name>36&quot; Plastic Rake</name> 
+            <quantity>2</quantity> 
+            <unitprice>6.95</unitprice> 
+        </item> 
+        <item id="68"> 
+            <name>Standard paint thinner</name> 
+            <quantity>3</quantity> 
+            <unitprice>8.95</unitprice> 
+        </item> 
+    </items> 
+</order>

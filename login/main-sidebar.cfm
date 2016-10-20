@@ -27,7 +27,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li <!---class="active"--->><a href="/admin-esempio/index.html"><i class="fa fa-circle-o"></i> Nuova Missione</a></li>
+            <li <!---class="active"--->><a href="missione.cfm"><i class="fa fa-circle-o"></i> Richiesta Missione</a></li>
             <li><a href="/admin-esempio/index2.html"><i class="fa fa-circle-o"></i> Elenco Missioni</a></li>
             <li>
             	<li class="treeview">
