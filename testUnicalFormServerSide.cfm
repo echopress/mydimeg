@@ -200,7 +200,7 @@
 			
 			success:function(data){
 			
-			  //alert("Dati inviati con successo!");
+			  alert("Dati inviati con successo!");
 							
 			},
 			
@@ -220,49 +220,12 @@
   
   	function salvaAndFirma(){ 
 	
-	
-	    //scrivere dati nelo DB
-	    //salva();	
-		
-		
-		var dataToSend = {
 			
-			'Q_QUERY' : '<cfoutput>#postData#</cfoutput>',
-			'Q_NOME_FORM' : '<cfoutput>#FORM.nomeForm#</cfoutput>',
-            'Q_V_TEMP_TOT' : '<cfoutput>#v_temp_tot#</cfoutput>'
-			
-		};
-		
-			
-		$.ajax({
-			
-			type:"POST",	
-			url:"writeDB.cfm",		
-			data: dataToSend,
-			cache:false,
-			timeout:120000,
-			async:false,		
-			
-			success:function(data){
-			
-			  alert("Dati inviati con successo salva  firma!");
-							
-			},
-			
-			error:function(data){
-				
-			   alert("Errore nella connessione al server!");
-			  
-			   //location.reload(true);
-						  
-			}
-		
-		});//end ajax_call
+		salva();	
 		
 
 		var pin = document.myForm.pin.value;
 		var v = '<cfoutput>#FORM.nomeForm#</cfoutput>'+'.xml';
-		alert(v);
 		
 		var urlToSigning = 'http://svilmydimeg.echopress.it/portale_admin/' + '<cfoutput>#FORM.nomeForm#</cfoutput>'+'.xml';
 		
@@ -280,19 +243,7 @@
 	 
 	}   
 	
-	function login(){
-	
-		var pin = document.myForm.pin.value;
-		var urlToSigning = "http://svilmydimeg.echopress.it/portale_admin/tommy-xml-form2.xml";	
-		var cfmScriptToSigned =  "http://svilmydimeg.echopress.it/portale_admin/testHTTPUnical.cfm?val1=nomefileMultiSign";	
-		        		
-       
-		LoginSicuroApplet.loginSicuroXml(pin, urlToSigning, cfmScriptToSigned);
-		
-		document.myForm.pin.value="";
 	  
-	}
-  
 	</script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
